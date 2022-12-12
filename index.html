@@ -79,6 +79,10 @@
 			})
 			.then((response) => {
 				let roles = response.roles;
+				const Itoken = response.token;
+				localStorage.setItem('token', Itoken);
+				localStorage.setItem('role', roles);
+				localStorage.setItem('id', response.id)
 				if (roles[0] == "ADMIN") {
 					window.location.href = '/admin.html'
 				} else{

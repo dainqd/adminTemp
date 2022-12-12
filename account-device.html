@@ -116,7 +116,7 @@
             
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a onclick="logoutFunction()" class="dropdown-item d-flex align-items-center" href="/index.html">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -352,5 +352,19 @@
   <script src="js/main.js"></script>
 
 </body>
+<script>
+  function logoutFunction(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+  }
+  
+  console.log(localStorage.getItem("token"));
+  function checkToken(){
+    if(localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN"){
+      window.location.href = '/404.html'
+    }
+  }
+  checkToken();
+</script>
 
 </html>
