@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Device</title>
+  <title>Security</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -38,7 +38,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="admin.html" class="logo d-flex align-items-center">
         <img src="images/logo.png" alt="">
-        <span class="d-none d-lg-block">Device</span>
+        <span class="d-none d-lg-block">Admin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -156,12 +156,12 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-list-group.html">
+            <a href="account-security.html">
               <i class="bi bi-circle"></i><span>Security</span>
             </a>
           </li>
           <li>
-            <a href="components-modal.html">
+            <a href="account-device.html">
               <i class="bi bi-circle"></i><span>Device</span>
             </a>
           </li>
@@ -174,17 +174,17 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href="create-account.html">
               <i class="bi bi-circle"></i><span>Create Account</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="list-account.html">
               <i class="bi bi-circle"></i><span>List Accounts</span>
             </a>
           </li>
           <li>
-            <a href="forms-validation.html">
+            <a href="delete-account.html">
               <i class="bi bi-circle"></i><span>Account Deleted</span>
             </a>
           </li>
@@ -204,129 +204,123 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Device</h1>
+      <h1>Security</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin.html">Home</a></li>
           <li class="breadcrumb-item">Account Security</li>
-          <li class="breadcrumb-item active">Device</li>
+          <li class="breadcrumb-item active">Security</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-10 ">
+
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Basic Modal</h5>
-              <p>Toggle a working modal demo by clicking the button below. It will slide down and fade in from the top of the page</p>
+              <h5 class="card-title">Default List Group</h5>
 
-              <!-- Basic Modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
-                Basic Modal
-              </button>
-              <div class="modal fade" id="basicModal" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Basic Modal</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- End Basic Modal-->
+              <!-- Default List group -->
+              <ul class="list-group">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>
+              </ul><!-- End Default List group -->
 
             </div>
           </div>
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Disabled Backdrop</h5>
-              <p>You can disable the backdrop by adding <code>data-bs-backdrop="false"</code> to <code>.modal-dialog</code></p>
+              <h5 class="card-title">Links and buttons</h5>
 
-              <!-- Disabled Backdrop Modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#disablebackdrop">
-                Launch Modal
-              </button>
-              <div class="modal fade" id="disablebackdrop" tabindex="-1" data-bs-backdrop="false">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Disabled Backdrop</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- End Disabled Backdrop Modal-->
+              <!-- List group with Links and buttons -->
+              <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                  The current button
+                </button>
+                <button type="button" class="list-group-item list-group-item-action">A second item</button>
+                <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+              </div><!-- End List group with Links and buttons -->
 
             </div>
           </div>
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Scrolling long content</h5>
-              <p>When modals become too long for the user’s viewport or device, they scroll independent of the page itself. You can also create a scrollable modal that allows scroll the modal body by adding <code>.modal-dialog-scrollable</code> to <code>.modal-dialog</code></p>
+              <h5 class="card-title">With Icons</h5>
 
-              <!-- Scrolling Modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scrollingModal">
-                Scrolling Modal
-              </button>
-              <div class="modal fade" id="scrollingModal" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Scrolling Modal</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" style="min-height: 1500px;">
-                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- End Scrolling Modal-->
+              <!-- List group With Icons -->
+              <ul class="list-group">
+                <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i> An item</li>
+                <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i> A second item</li>
+                <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i> A third item</li>
+                <li class="list-group-item"><i class="bi bi-exclamation-octagon me-1 text-warning"></i> A fourth item</li>
+              </ul><!-- End List group With Icons -->
 
-              <!-- Modal Dialog Scrollable -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable">
-                Modal Dialog Scrollable
-              </button>
-              <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Modal Dialog Scrollable</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
-                      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                      This content should appear at the bottom after you scroll.
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- End Modal Dialog Scrollable-->
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Numbered</h5>
+
+              <!-- List group Numbered -->
+              <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Cras justo odio</li>
+              </ol><!-- End List group Numbered -->
+
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">With badges</h5>
+
+              <!-- List group With badges -->
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  A list item
+                  <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  A second list item
+                  <span class="badge bg-primary rounded-pill">2</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  A third list item
+                  <span class="badge bg-primary rounded-pill">1</span>
+                </li>
+              </ul><!-- End List With badges -->
+
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">With Contextual Classes</h5>
+
+              <!-- List group With Contextual classes -->
+              <ul class="list-group">
+                <li class="list-group-item">A simple default list group item</li>
+
+                <li class="list-group-item list-group-item-primary">A simple primary list group item</li>
+                <li class="list-group-item list-group-item-secondary">A simple secondary list group item</li>
+                <li class="list-group-item list-group-item-success">A simple success list group item</li>
+                <li class="list-group-item list-group-item-danger">A simple danger list group item</li>
+                <li class="list-group-item list-group-item-warning">A simple warning list group item</li>
+                <li class="list-group-item list-group-item-info">A simple info list group item</li>
+                <li class="list-group-item list-group-item-light">A simple light list group item</li>
+                <li class="list-group-item list-group-item-dark">A simple dark list group item</li>
+              </ul><!-- End List Group With Contextual classes -->
 
             </div>
           </div>
@@ -350,7 +344,6 @@
 
   <!-- Template Main JS File -->
   <script src="js/main.js"></script>
-
 </body>
 
 </html>
