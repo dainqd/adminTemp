@@ -518,7 +518,7 @@
   
   console.log(localStorage.getItem("token"));
   function checkToken(){
-    if(localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN"){
+    if(localStorage.getItem("token") == null || localStorage.getItem("role") != "Admin"){
       window.location.href = '/404.html'
     }
   }
