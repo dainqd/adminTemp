@@ -15,7 +15,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="js/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -205,13 +207,13 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="images/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
+            <span id="username-title" class="d-none d-md-block dropdown-toggle ps-2"></span>
+        </a><!-- End Profile Iamge Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+                <h6 id="fullname-0"></h6>
+                <span id="job-0"></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -220,7 +222,7 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="admin.html">
                 <i class="bi bi-person"></i>
-                <span>My Profile</span>
+                <span>Admin</span>
               </a>
             </li>
             <li>
@@ -237,7 +239,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            
+
 
             <li>
               <a onclick="logoutFunction()" class="dropdown-item d-flex align-items-center" href="/index.html">
@@ -333,8 +335,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Forms</li>
-          <li class="breadcrumb-item active">Validation</li>
+          <li class="breadcrumb-item">Account Deleted</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -345,55 +346,20 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Browser Default</h5>
-              <p>Browser default validation with using the <code>required</code> keyword. Try submitting the form below. Depending on your browser and OS, you’ll see a slightly different style of feedback.</p>
+              <h5 class="card-title">Account Deleted</h5>
+              <p>Please enter the id you want to <code>Delete</code></p>
 
               <!-- Browser Default Validation -->
               <form class="row g-3">
                 <div class="col-md-4">
-                  <label for="validationDefault01" class="form-label">First name</label>
-                  <input type="text" class="form-control" id="validationDefault01" value="John" required>
-                </div>
-                <div class="col-md-4">
-                  <label for="validationDefault02" class="form-label">Last name</label>
-                  <input type="text" class="form-control" id="validationDefault02" value="Doe" required>
-                </div>
-                <div class="col-md-4">
-                  <label for="validationDefaultUsername" class="form-label">Username</label>
-                  <div class="input-group">
-                    <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                    <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <label for="validationDefault03" class="form-label">City</label>
-                  <input type="text" class="form-control" id="validationDefault03" required>
-                </div>
-                <div class="col-md-3">
-                  <label for="validationDefault04" class="form-label">State</label>
-                  <select class="form-select" id="validationDefault04" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>...</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <label for="validationDefault05" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="validationDefault05" required>
+                  <label for="validationDefault01" class="form-label">ID</label>
+                  <input type="text" class="form-control" id="validationDefault01" placeholder="113" required>
                 </div>
                 <div class="col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">
-                      Agree to terms and conditions
-                    </label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <button class="btn btn-primary" type="submit">Submit form</button>
+                  <input class="btn btn-primary" type="submit" id="submit" value="Submit">
                 </div>
               </form>
               <!-- End Browser Default Validation -->
-
             </div>
           </div>
 
@@ -403,7 +369,8 @@
 
   </main><!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="js/vendor/apexcharts/apexcharts.min.js"></script>
@@ -421,14 +388,50 @@
 </body>
 
 <script>
-  function logoutFunction(){
+  function myFunctionProfileViews() {
+    console.log(localStorage.getItem("id"));
+    fetch('http://localhost:8080/admin/api/user/' + localStorage.getItem("id"), {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      },
+    })
+      .then(response => {
+        if (response.status == 200) {
+          console.log(response);
+          return response.json();
+        }
+      })
+      .then((response) => {
+        let firstname = response.firstName;
+        let lastname = response.lastName;
+        let fullname = firstname + " " + lastname;
+        let job = response.job;
+        let username = response.username;
+
+        if (fullname == null) {
+          fullname = "Not updated yet";
+        }
+        if (job == null) {
+          job = "Not updated yet";
+        }
+        document.getElementById("fullname-0").innerHTML = fullname;
+        document.getElementById("job-0").innerHTML = job;
+        document.getElementById("username-title").innerHTML = username;
+      })
+      .catch(error => console.log(error));
+  }
+  myFunctionProfileViews();
+
+  function logoutFunction() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
   }
 
   console.log(localStorage.getItem("token"));
-  function checkToken(){
-    if(localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN"){
+  function checkToken() {
+    if (localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN") {
       window.location.href = '/404.html'
     }
   }

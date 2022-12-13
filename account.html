@@ -82,13 +82,13 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="images/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span id="username-title" class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
+            <span id="username-title" class="d-none d-md-block dropdown-toggle ps-2"></span>
+        </a><!-- End Profile Iamge Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6 id="fullname-0">Kevin Anderson</h6>
-              <span id="job-0">Web Designer</span>
+                <h6 id="fullname-0"></h6>
+                <span id="job-0"></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -97,7 +97,7 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="account.html">
                 <i class="bi bi-person"></i>
-                <span>My Profile</span>
+                <span>Admin</span>
               </a>
             </li>
             <li>
@@ -114,7 +114,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            
+
 
             <li>
               <a onclick="logoutFunction()" class="dropdown-item d-flex align-items-center" href="/index.html">
@@ -171,7 +171,8 @@
               <ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                  <button class="nav-link active" data-bs-toggle="tab"
+                    data-bs-target="#profile-overview">Overview</button>
                 </li>
               </ul>
               <div class="tab-content pt-2">
@@ -214,11 +215,11 @@
                     <div id="email" class="col-lg-9 col-md-8"></div>
                   </div>
                 </div>
+              </div>
             </div>
-          </div>
 
+          </div>
         </div>
-      </div>
     </section>
 
   </main><!-- End #main -->
@@ -242,51 +243,51 @@
 </body>
 
 <script>
-      function myFunctionProfileViews(){
+  function myFunctionProfileViews() {
     console.log(localStorage.getItem("id"));
-		fetch('http://localhost:8080/api/v1/user/'+localStorage.getItem("id"), {
-				method: 'GET',
-				headers: {
-					'content-type': 'application/json',
-          // 'Authorization': `Bearer ${localStorage.getItem("token")}`
-				},
-			})
-			.then(response => {	
-				if (response.status == 200) {
+    fetch('http://localhost:8080/api/v1/user/' + localStorage.getItem("id"), {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        // 'Authorization': `Bearer ${localStorage.getItem("token")}`
+      },
+    })
+      .then(response => {
+        if (response.status == 200) {
           console.log(response);
-					return response.json();
-				}
-			})
+          return response.json();
+        }
+      })
       .then((response) => {
-				let firstname = response.firstName;
+        let firstname = response.firstName;
         let lastname = response.lastName;
         let fullname = firstname + " " + lastname;
         let gender = response.gender;
         let birthday = response.birthday;
         let job = response.job;
         // let job = response.roles;
-        let addreess = response.addreess;
+        let address = response.address;
         let phonenumber = response.phoneNumber;
         let email = response.email;
         let username = response.username;
 
-        if(fullname == null){
-           fullname = "Not updated yet";
+        if (fullname == null) {
+          fullname = "Not updated yet";
         }
-        if(gender == null){
-           gender = "Not updated yet";
+        if (gender == null) {
+          gender = "Not updated yet";
         }
-        if(birthday == null){
-           birthday = "Not updated yet";
+        if (birthday == null) {
+          birthday = "Not updated yet";
         }
-        if(job == null){
-           job = "Not updated yet";
+        if (job == null) {
+          job = "Not updated yet";
         }
-        if(addreess == null){
-           addreess = "Not updated yet";
-        }  
-        if(phonenumber == null){
-           phonenumber = "Not updated yet";
+        if (address == null) {
+          address = "Not updated yet";
+        }
+        if (phonenumber == null) {
+          phonenumber = "Not updated yet";
         }
 
         document.getElementById("fullname-0").innerHTML = fullname;
@@ -297,13 +298,13 @@
         document.getElementById("gender").innerHTML = gender;
         document.getElementById("birthday").innerHTML = birthday;
         document.getElementById("job").innerHTML = job;
-        document.getElementById("address").innerHTML = addreess;
+        document.getElementById("address").innerHTML = address;
         document.getElementById("phonenumber").innerHTML = phonenumber;
         document.getElementById("email").innerHTML = email;
         console.log(username);
         document.getElementById("username-title").innerHTML = username;
-			})
-			.catch(error => console.log(error));
+      })
+      .catch(error => console.log(error));
   }
   myFunctionProfileViews();
 
