@@ -33,7 +33,7 @@
 
 </head>
 
-<body>
+<body id="bodylist">
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -208,12 +208,12 @@
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="images/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span id="username-title" class="d-none d-md-block dropdown-toggle ps-2"></span>
-        </a><!-- End Profile Iamge Icon -->
+          </a><!-- End Profile Iamge Icon -->
 
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-                <h6 id="fullname-0"></h6>
-                <span id="job-0"></span>
+              <h6 id="fullname-0"></h6>
+              <span id="job-0"></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -347,17 +347,40 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Account Deleted</h5>
-              <p>Please enter the id you want to <code>Delete</code></p>
+              <p>Please enter the id you want to <code> Delete.</code></p>
 
               <!-- Browser Default Validation -->
               <form class="row g-3">
                 <div class="col-md-4">
-                  <label for="validationDefault01" class="form-label">ID</label>
-                  <input type="text" class="form-control" id="validationDefault01" placeholder="113" required>
+                  <label for="validationDefault01" class="form-label">ID: </label>
+                  <input id="id-selector" type="text" class="form-control" id="validationDefault01" placeholder="113"
+                    required>
                 </div>
+                <!-- Modal -->
                 <div class="col-12">
-                  <input class="btn btn-primary" type="submit" id="submit" value="Submit">
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal">
+                    Delete
+                  </button>
                 </div>
+                <div class="modal fade" id="basicModal" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to delete this account?
+                        <p><span class="text-danger">You won't be able to undo it after pressing delete button!</span>
+                        </p>
+                      </div>
+                      <div class="modal-footer">
+                        <button id="close-btn" type="button" class="btn btn-secondary"
+                          data-bs-dismiss="modal">Close</button>
+                        <button onclick="myFunctionDelete()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End Modal-->
               </form>
               <!-- End Browser Default Validation -->
             </div>
@@ -423,6 +446,26 @@
       .catch(error => console.log(error));
   }
   myFunctionProfileViews();
+
+  function myFunctionDelete() {
+    let id = document.getElementById('id-selector').value;
+    fetch('http://localhost:8080/admin/api/user/' + id, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.status == 200) {
+          alert("Delete Success!")
+        } else {
+          alert("Error!")
+        }
+      })
+      .catch(error => console.log(error));
+  }
 
   function logoutFunction() {
     localStorage.removeItem("token");
