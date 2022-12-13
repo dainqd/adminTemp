@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Account Deleted</title>
+    <title>Account</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -316,7 +316,7 @@
                     <td id="id-selector">${ID}</td>
                     <td class="pl-0">
                     <div class="d-flex align-items-center">
-                    <a id="username" href="#" class="name">${username}</a>
+                    <a onclick="mydirectional()" id="username" href="#" class="name">${username}</a>
                     </div>
                     </td>
                     <td id="email">${email}</td>
@@ -351,44 +351,49 @@
     myFunctionAllUser();
 
     function myFunctionProfileViews() {
-    console.log(localStorage.getItem("id"));
-    fetch('https://localhost:7155/api/Auth/' + localStorage.getItem("id"), {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
-      },
-    })
-      .then(response => {
-        if (response.status == 200) {
-          console.log(response);
-          return response.json();
-        }
-      })
-      .then((response) => {
-        let firstname = response.firstName;
-        let lastname = response.lastName;
-        let fullname = firstname + " " + lastname;
-        let job = response.role;
-        let username = response.username;
+        console.log(localStorage.getItem("id"));
+        fetch('https://localhost:7155/api/Auth/' + localStorage.getItem("id"), {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            },
+        })
+            .then(response => {
+                if (response.status == 200) {
+                    console.log(response);
+                    return response.json();
+                }
+            })
+            .then((response) => {
+                let firstname = response.firstName;
+                let lastname = response.lastName;
+                let fullname = firstname + " " + lastname;
+                let job = response.role;
+                let username = response.username;
 
-        if (fullname == null) {
-          fullname = "Not updated yet";
-        }
-        if (job == null) {
-          job = "Not updated yet";
-        }
-        document.getElementById("fullname-0").innerHTML = fullname;
-        document.getElementById("job-0").innerHTML = job;
-        document.getElementById("username-title").innerHTML = username;
-      })
-      .catch(error => console.log(error));
-  }
-  myFunctionProfileViews();
+                if (fullname == null) {
+                    fullname = "Not updated yet";
+                }
+                if (job == null) {
+                    job = "Not updated yet";
+                }
+                document.getElementById("fullname-0").innerHTML = fullname;
+                document.getElementById("job-0").innerHTML = job;
+                document.getElementById("username-title").innerHTML = username;
+            })
+            .catch(error => console.log(error));
+    }
+    myFunctionProfileViews();
 
     function logoutFunction() {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+    }
+
+    function mydirectional(){
+        // localStorage.setItem('hello', {ID});
+        window.location.href = '/user-detail.html'
     }
 
     console.log(localStorage.getItem("token"));
