@@ -381,7 +381,7 @@
                       </div>
                     </div>
                     <div class="text-center">
-                      <button onclick="myFunctionProfileEdit()" type="submit" class="btn btn-primary">Save
+                      <button onclick="myFunctionProfileEdit()" type="button" class="btn btn-primary">Save
                         Changes</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
@@ -424,7 +424,7 @@
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                      <button type="button" class="btn btn-primary">Save Changes</button>
                     </div>
                   </form><!-- End settings Form -->
 
@@ -456,7 +456,7 @@
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button type="button" class="btn btn-primary">Change Password</button>
                     </div>
                   </form><!-- End Change Password Form -->
 
@@ -494,7 +494,7 @@
 
   function myFunctionProfileViews() {
     console.log(localStorage.getItem("id"));
-    fetch('http://localhost:8080/admin/api/user/' + localStorage.getItem("id"), {
+    fetch('https://localhost:7155/api/Auth/' + localStorage.getItem("id"), {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -513,12 +513,13 @@
         let fullname = firstname + " " + lastname;
         let gender = response.gender;
         let birthday = response.birthday;
-        let job = response.job;
+        // let job = response.Job;
+        let job = response.role;
         let address = response.address;
         let phonenumber = response.phoneNumber;
         let email = response.email;
         let username = response.username;
-
+        console.log(username);
         if (fullname == null) {
           fullname = "Not updated yet";
         }
@@ -555,9 +556,9 @@
         document.getElementById("username-title").innerHTML = username;
 
         document.getElementById("fullName-edit").value = fullname;
-        document.getElementById("birthday-edit").value = gender;
-        document.getElementById("job-edit").value = birthday;
-        document.getElementById("gender-edit").value = job;
+        document.getElementById("birthday-edit").value = birthday;
+        document.getElementById("job-edit").value = job;
+        document.getElementById("gender-edit").value = gender;
         document.getElementById("address-edit").value = address;
         document.getElementById("phone-edit").value = phonenumber;
         document.getElementById("email-edit").value = email;
@@ -577,22 +578,25 @@
     console.log(fullIp)
 
     const nameArray = fullIp.split(" ");
-    let firstnameIp = nameArray[1];
-    let lastnameIp = nameArray[2];
+    let firstnameIp = nameArray[0];
+    let lastnameIp = nameArray[1];
 
     console.log(firstnameIp);
     console.log(emailIp);
     const data = {
       firstName: firstnameIp,
       lastName: lastnameIp,
+      //  Đoạn này em định bổ sung thêm phần birthday, gender, address
       birthday: birthIp,
       job: jobIp,
       gender: genderIp,
       address: addressIp,
+      username: localStorage.getItem('username'),
       phoneNumber: phonenbIp,
       email: emailIp,
+      role: "Admin",
     }
-    fetch('http://localhost:8080/admin/api/user/' + localStorage.getItem("id"), {
+    fetch('https://localhost:7155/api/Auth/updateinfo/' + localStorage.getItem("id"), {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -603,8 +607,7 @@
     })
       .then(response => {
         if (response.status == 200) {
-          return response.json();
-          alert("Edit Success!")
+          alert("Edit Success!");
         }
         else {
           alert("Error!" + response.status);
@@ -622,7 +625,8 @@
   console.log(localStorage.getItem("token"));
 
   function checkToken() {
-    if (localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN") {
+    // if (localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN") {
+      if (localStorage.getItem("token") == null || localStorage.getItem("role") != "Admin") {
       window.location.href = '/404.html'
     }
   }

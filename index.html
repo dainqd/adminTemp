@@ -32,7 +32,7 @@
 	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 	            </div>
 	            <div class="form-group">
-	            	<input onclick="myfunction()" type="submit" value="Sign In" class="form-control btn btn-primary submit px-3">
+	            	<input onclick="myfunction()" type="button" value="Sign In" class="form-control btn btn-primary submit px-3">
 	            </div>
 	            <div class="form-group d-md-flex">
 	            	<div class="w-50">
@@ -60,7 +60,7 @@
 				username: usr,
 				password: pass,
 			};
-			fetch('http://localhost:8080/api/v1/auth/signin', {
+			fetch('https://localhost:7155/api/Auth/login', {
 				method: 'POST',
 				headers: {
 					'content-type': 'application/json'
@@ -78,13 +78,15 @@
 
 			})
 			.then((response) => {
-				let role = response.roles;
+				// let role = response.roles;
+				let role = response.role;
 				const Itoken = response.token;
 				localStorage.setItem('token', Itoken);
 				localStorage.setItem('role', role);
 				localStorage.setItem('id', response.id)
-				if (role[0] == "ADMIN") {
-				// if (role == "ADMIN") {
+				localStorage.setItem('username', response.username)
+				// if (role[0] == "ADMIN") {
+				if (role == "Admin") {
 					window.location.href = '/admin.html'
 				} else{
 					window.location.href = '/account.html'

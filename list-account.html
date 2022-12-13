@@ -140,7 +140,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="index.html">
+                <a class="nav-link " href="admin.html">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -329,7 +329,7 @@
 
     function myFunctionAllUser() {
         console.log(localStorage.getItem("id"));
-        fetch('http://localhost:8080/admin/api/user', {
+        fetch('https://localhost:7155/api/Auth', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -352,7 +352,7 @@
 
     function myFunctionProfileViews() {
     console.log(localStorage.getItem("id"));
-    fetch('http://localhost:8080/admin/api/user/' + localStorage.getItem("id"), {
+    fetch('https://localhost:7155/api/Auth/' + localStorage.getItem("id"), {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -369,7 +369,7 @@
         let firstname = response.firstName;
         let lastname = response.lastName;
         let fullname = firstname + " " + lastname;
-        let job = response.job;
+        let job = response.role;
         let username = response.username;
 
         if (fullname == null) {
@@ -393,7 +393,8 @@
 
     console.log(localStorage.getItem("token"));
     function checkToken() {
-        if (localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN") {
+        // if (localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN") {
+        if (localStorage.getItem("token") == null || localStorage.getItem("role") != "Admin") {
             window.location.href = '/404.html'
         }
     }

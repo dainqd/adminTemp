@@ -340,7 +340,7 @@
 <script>
 function myFunctionProfileViews() {
     console.log(localStorage.getItem("id"));
-    fetch('http://localhost:8080/admin/api/user/' + localStorage.getItem("id"), {
+    fetch('https://localhost:7155/admin/api/user/' + localStorage.getItem("id"), {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -381,7 +381,8 @@ function myFunctionProfileViews() {
 
   console.log(localStorage.getItem("token"));
   function checkToken() {
-    if (localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN") {
+    // if (localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN") {
+      if (localStorage.getItem("token") == null || localStorage.getItem("role") != "Admin") {
       window.location.href = '/404.html'
     }
   }

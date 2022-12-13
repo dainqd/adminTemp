@@ -97,14 +97,14 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="account.html">
                 <i class="bi bi-person"></i>
-                <span>Admin</span>
+                <span>My Profile</span>
               </a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
-            <li class="d-none">
+            <li class="">
               <a class="dropdown-item d-flex align-items-center" href="account.html">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
@@ -245,11 +245,11 @@
 <script>
   function myFunctionProfileViews() {
     console.log(localStorage.getItem("id"));
-    fetch('http://localhost:8080/api/v1/user/' + localStorage.getItem("id"), {
+    fetch('https://localhost:7155/api/Auth/' + localStorage.getItem("id"), {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
-        // 'Authorization': `Bearer ${localStorage.getItem("token")}`
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
       },
     })
       .then(response => {
@@ -264,8 +264,8 @@
         let fullname = firstname + " " + lastname;
         let gender = response.gender;
         let birthday = response.birthday;
-        let job = response.job;
-        // let job = response.roles;
+        // let job = response.job;
+        let job = response.role;
         let address = response.address;
         let phonenumber = response.phoneNumber;
         let email = response.email;
@@ -315,7 +315,8 @@
 
   console.log(localStorage.getItem("token"));
   function checkToken() {
-    if (localStorage.getItem("token") == null || localStorage.getItem("role") != "USER") {
+    // if (localStorage.getItem("token") == null || localStorage.getItem("role") != "USER") {
+      if (localStorage.getItem("token") == null || localStorage.getItem("role") != "User") {
       window.location.href = '/404.html'
     }
   }
