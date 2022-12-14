@@ -469,6 +469,8 @@ function myFunctionProfileViews() {
   function logoutFunction() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("username");
+    localStorage.removeItem("usernameUser");
   }
 
   console.log(localStorage.getItem("token"));

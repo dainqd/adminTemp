@@ -575,14 +575,11 @@
     var addressIp = document.getElementById('address-edit').value;
     var phonenbIp = document.getElementById('phone-edit').value;
     var emailIp = document.getElementById('email-edit').value;
-    console.log(fullIp)
 
     const nameArray = fullIp.split(" ");
     let firstnameIp = nameArray[0];
     let lastnameIp = nameArray[1];
 
-    console.log(firstnameIp);
-    console.log(emailIp);
     const data = {
       firstName: firstnameIp,
       lastName: lastnameIp,
@@ -596,7 +593,7 @@
       email: emailIp,
       role: "Admin",
     }
-    fetch('https://localhost:7155/api/Auth/updateinfo/' + localStorage.getItem("id"), {
+    fetch('https://localhost:7155/api/Auth/update-info/' + localStorage.getItem("id"), {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -620,9 +617,9 @@
   function logoutFunction() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("username");
+    localStorage.removeItem("usernameUser");
   }
-
-  console.log(localStorage.getItem("token"));
 
   function checkToken() {
     // if (localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN") {
@@ -631,10 +628,6 @@
     }
   }
   checkToken();
-
-  function hideSave() {
-
-  }
 </script>
 
 </html>

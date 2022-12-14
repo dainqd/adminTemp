@@ -316,7 +316,7 @@
                     <td id="id-selector">${ID}</td>
                     <td class="pl-0">
                     <div class="d-flex align-items-center">
-                    <a onclick="mydirectional()" id="username" href="#" class="name">${username}</a>
+                    <a onclick="mydirectional(${ID})" id="username" href="#" class="name">${username}</a>
                     </div>
                     </td>
                     <td id="email">${email}</td>
@@ -389,9 +389,8 @@
         localStorage.removeItem("role");
     }
 
-    function mydirectional(){
-        // localStorage.setItem('hello', {ID});
-        window.location.href = '/user-detail.html'
+    function mydirectional(id){
+        window.location.href = '/user-detail.html?id=' + id
     }
 
     console.log(localStorage.getItem("token"));

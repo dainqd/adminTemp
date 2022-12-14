@@ -203,11 +203,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Profile</h1>
+      <h1>Detail</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin.html">Home</a></li>
-          <li class="breadcrumb-item">Users</li>
+          <li class="breadcrumb-item">Detail</li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>
       </nav>
@@ -276,7 +276,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Job</div>
-                    <div id="job" class="col-lg-9 col-md-8">Web Designer</div>
+                    <div id="job" class="col-lg-9 col-md-8"></div>
                   </div>
 
                   <div class="row">
@@ -370,7 +370,7 @@
                       </div>
                     </div>
                     <div class="text-center">
-                      <button onclick="" type="button" class="btn btn-primary">Save
+                      <button onclick="myFunctionProfileEdit()" type="button" class="btn btn-primary">Save
                         Changes</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
@@ -403,12 +403,17 @@
 
   <!-- Template Main JS File -->
   <script src="js/main.js"></script>
-
+  <script src="js/myjavascript.js"></script>
 </body>
 <script>
+  window.ready(function () {
+    myFunctionProfileViews();
+    checkToken();
+    getDetail();
+  });
 
   function myFunctionProfileViews() {
-    console.log(localStorage.getItem("id"));
+    // console.log(localStorage.getItem("id"));
     fetch('https://localhost:7155/api/Auth/' + localStorage.getItem("id"), {
       method: 'GET',
       headers: {
@@ -418,7 +423,7 @@
     })
       .then(response => {
         if (response.status == 200) {
-          console.log(response);
+          // console.log(response);
           return response.json();
         }
       })
@@ -434,7 +439,7 @@
         let phonenumber = response.phoneNumber;
         let email = response.email;
         let username = response.username;
-        console.log(username);
+        // console.log(username);
         if (fullname == null) {
           fullname = "Not updated yet";
         }
@@ -459,28 +464,11 @@
 
         document.getElementById("fullname-0").innerHTML = fullname;
         document.getElementById("job-0").innerHTML = job;
-        document.getElementById("fullname-first").innerHTML = fullname;
-        document.getElementById("job-first").innerHTML = job;
-        document.getElementById("fullname").innerHTML = fullname;
-        document.getElementById("gender").innerHTML = gender;
-        document.getElementById("birthday").innerHTML = birthday;
-        document.getElementById("job").innerHTML = job;
-        document.getElementById("address").innerHTML = address;
-        document.getElementById("phonenumber").innerHTML = phonenumber;
-        document.getElementById("email").innerHTML = email;
         document.getElementById("username-title").innerHTML = username;
 
-        document.getElementById("fullName-edit").value = fullname;
-        document.getElementById("birthday-edit").value = birthday;
-        document.getElementById("job-edit").value = job;
-        document.getElementById("gender-edit").value = gender;
-        document.getElementById("address-edit").value = address;
-        document.getElementById("phone-edit").value = phonenumber;
-        document.getElementById("email-edit").value = email;
       })
       .catch(error => console.log(error));
   }
-  myFunctionProfileViews();
 
   function myFunctionProfileEdit() {
     var fullIp = document.getElementById('fullName-edit').value;
@@ -490,28 +478,28 @@
     var addressIp = document.getElementById('address-edit').value;
     var phonenbIp = document.getElementById('phone-edit').value;
     var emailIp = document.getElementById('email-edit').value;
-    console.log(fullIp)
 
     const nameArray = fullIp.split(" ");
     let firstnameIp = nameArray[0];
     let lastnameIp = nameArray[1];
 
-    console.log(firstnameIp);
-    console.log(emailIp);
     const data = {
       firstName: firstnameIp,
       lastName: lastnameIp,
+      username: localStorage.getItem('usernameUser'),
       //  Đoạn này em định bổ sung thêm phần birthday, gender, address
       birthday: birthIp,
-      job: jobIp,
       gender: genderIp,
       address: addressIp,
-      username: localStorage.getItem('username'),
       phoneNumber: phonenbIp,
       email: emailIp,
-      role: "Admin",
+      role: jobIp,
     }
-    fetch('https://localhost:7155/api/Auth/updateinfo/' + localStorage.getItem("id"), {
+    const url = new URL(window.location);
+    const searchParams = url.searchParams;
+    const id = searchParams.get('id');
+    console.log(jobIp);
+    fetch('https://localhost:7155/api/Auth/update-info/' + id, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -535,20 +523,89 @@
   function logoutFunction() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("username");
+    localStorage.removeItem("usernameUser");
   }
-
-  console.log(localStorage.getItem("token"));
 
   function checkToken() {
     // if (localStorage.getItem("token") == null || localStorage.getItem("role") != "ADMIN") {
-      if (localStorage.getItem("token") == null || localStorage.getItem("role") != "Admin") {
+    if (localStorage.getItem("token") == null || localStorage.getItem("role") != "Admin") {
       window.location.href = '/404.html'
     }
   }
-  checkToken();
 
-  function hideSave() {
+  function getDetail() {
+    const url = new URL(window.location);
+    const searchParams = url.searchParams;
+    const id = searchParams.get('id');
+    fetch('https://localhost:7155/api/Auth/' + id, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      },
+    })
+      .then(response => {
+        if (response.status == 200) {
+          return response.json();
+        }
+      })
+      .then((response) => {
+        console.log(response);
+        let firstname = response.firstName;
+        let lastname = response.lastName;
+        let fullname = firstname + " " + lastname;
+        let gender = response.gender;
+        let birthday = response.birthday;
+        // let job = response.Job;
+        let job = response.role;
+        let address = response.address;
+        let phonenumber = response.phoneNumber;
+        let email = response.email;
+        let username = response.username;
+        // console.log(username);
+        if (fullname == null) {
+          fullname = "Not updated yet";
+        }
+        if (gender == null) {
+          gender = "Not updated yet";
+        }
+        if (birthday == null) {
+          birthday = "Not updated yet";
+        }
+        if (job == null) {
+          job = "Not updated yet";
+        }
+        if (address == null) {
+          address = "Not updated yet";
+        }
+        if (phonenumber == null) {
+          phonenumber = "Not updated yet";
+        }
+        if (email == null) {
+          email = "Not updated yet";
+        }
+        document.getElementById("fullname-first").innerHTML = fullname;
+        document.getElementById("job-first").innerHTML = job;
+        document.getElementById("fullname").innerHTML = fullname;
+        document.getElementById("gender").innerHTML = gender;
+        document.getElementById("birthday").innerHTML = birthday;
+        document.getElementById("job").innerHTML = job;
+        document.getElementById("address").innerHTML = address;
+        document.getElementById("phonenumber").innerHTML = phonenumber;
+        document.getElementById("email").innerHTML = email;
 
+        document.getElementById("fullName-edit").value = fullname;
+        document.getElementById("birthday-edit").value = birthday;
+        document.getElementById("job-edit").value = job;
+        document.getElementById("gender-edit").value = gender;
+        document.getElementById("address-edit").value = address;
+        document.getElementById("phone-edit").value = phonenumber;
+        document.getElementById("email-edit").value = email;
+
+        localStorage.setItem('usernameUser', username)
+      })
+      .catch(error => console.log(error));
   }
 </script>
 
